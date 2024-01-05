@@ -12,7 +12,8 @@
         "standard",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -24,6 +25,15 @@
         "react"
     ],
     "rules": {
+        "prettier/prettier": ["error", {
+            "printWidth": 100,
+            "tabWidth": 2,
+            "singleQuote": true,
+            "trailingComma": "all",
+            "arrowParens": "always",
+            "semi": false,
+            "endOfLine": "auto"
+        }],
         "react/react-in-jsx-scope": "off",
         "space-before-function-paren": ["error", "never"]
     }
