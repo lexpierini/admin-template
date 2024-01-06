@@ -35,9 +35,6 @@
                 "arrowParens": "always",
                 "semi": false,
                 "endOfLine": "auto"
-            },
-            {
-                "usePrettierrc": false
             }
         ],
         "react/react-in-jsx-scope": "off",

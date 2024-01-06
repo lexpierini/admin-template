@@ -5,5 +5,5 @@ type ContentProps = {
 }
 
 export default function Content(props: ContentProps) {
-  return <div className="mt-7 flex flex-col">{props.children}</div>
+  return <div className="mt-7 flex flex-col dark:text-gray-200">{props.children}</div>
 }
