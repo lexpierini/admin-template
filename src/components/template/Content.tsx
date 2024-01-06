@@ -1,13 +1,9 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
 type ContentProps = {
-    children?: ReactNode
+  children?: ReactNode
 }
 
 export default function Content(props: ContentProps) {
-    return (
-        <div className={`flex flex-col mt-7`}>
-            {props.children}
-        </div>
-    )
+  return <div className="mt-7 flex flex-col">{props.children}</div>
 }
