@@ -12,7 +12,7 @@ type LayoutProps = {
 }
 
 export default function Layout(props: LayoutProps) {
-  const { theme, changeTheme } = useAppData()
+  const { theme } = useAppData()
 
   return (
     <div className={`${theme} flex h-screen w-screen`}>

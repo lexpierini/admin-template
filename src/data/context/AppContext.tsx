@@ -7,11 +7,14 @@ type AppProviderProps = {
 type Theme = string | ''
 
 type AppContextProps = {
-  theme?: Theme
-  changeTheme?: () => void
+  theme: Theme
+  changeTheme: () => void
 }
 
-const AppContext = createContext<AppContextProps>({})
+const AppContext = createContext<AppContextProps>({
+  theme: '',
+  changeTheme: () => {},
+})
 
 export function AppProvider(props: AppProviderProps) {
   const [theme, setTheme] = useState<Theme>('')
