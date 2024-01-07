@@ -1,6 +1,7 @@
 import User from '@/model/User'
 import firebase from '../../firebase/config'
 import { ReactNode, createContext, useState } from 'react'
+import route from 'next/router'
 
 type AuthProviderProps = {
   children: ReactNode
@@ -29,7 +30,13 @@ export function AuthProvider(props: AuthProviderProps) {
   const [user, setUser] = useState<User>(null)
 
   const googleLogin = async () => {
-    console.log('login Google...')
+    const res = await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+
+    if (res.user?.email) {
+      const user = await normalizedUser(res.user)
+      setUser(user)
+      route.push('/')
+    }
   }
 
   return <AuthContext.Provider value={{ user, googleLogin }}>{props.children}</AuthContext.Provider>
