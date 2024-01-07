@@ -1,4 +1,4 @@
-import useAppData from '@/data/context/hook/useAppData'
+import useAppData from '@/data/hook/useAppData'
 import ChangeThemeButton from './ChangeThemeButton'
 import Title from './Title'
 

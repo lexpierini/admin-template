@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import Content from './Content'
 import Header from './Header'
 import SideMenu from './SideMenu'
-import useAppData from '@/data/context/hook/useAppData'
+import useAppData from '@/data/hook/useAppData'
 
 type LayoutProps = {
   title: string
