@@ -11,6 +11,7 @@ type AuthProviderProps = {
 type AuthContextProps = {
   user?: User
   googleLogin?: () => Promise<void>
+  logout?: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextProps>({})
@@ -57,17 +58,38 @@ export function AuthProvider(props: AuthProviderProps) {
   }
 
   const googleLogin = async () => {
-    const res = await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    sectionSetup(res.user)
-    route.push('/')
+    try {
+      setLoading(true)
+      const res = await firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      sectionSetup(res.user)
+      route.push('/')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const logout = async () => {
+    try {
+      setLoading(true)
+      await firebase.auth().signOut()
+      await sectionSetup(null)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
-    const cancel = firebase.auth().onIdTokenChanged(sectionSetup)
-    return () => cancel()
+    if (Cookies.get('admin-template-lexpierini-auth')) {
+      const cancel = firebase.auth().onIdTokenChanged(sectionSetup)
+      return () => cancel()
+    }
   }, [])
 
-  return <AuthContext.Provider value={{ user, googleLogin }}>{props.children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ user, googleLogin, logout }}>
+      {props.children}
+    </AuthContext.Provider>
+  )
 }
 
 export default AuthContext
