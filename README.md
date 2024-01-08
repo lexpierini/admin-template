@@ -13,6 +13,9 @@ Study project with Next.js
 - Typescript
 - Tailwind
 
+## Link to access the app
+[https://admin-template-lexpierini.vercel.app/authentication](https://admin-template-lexpierini.vercel.app/authentication)
+
 ## Images
 
 ![Login](/public/images/login_screenshot.png)
