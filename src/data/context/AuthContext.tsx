@@ -10,6 +10,7 @@ type AuthProviderProps = {
 
 type AuthContextProps = {
   user?: User
+  loading?: boolean
   googleLogin?: () => Promise<void>
   logout?: () => Promise<void>
 }
@@ -82,11 +83,13 @@ export function AuthProvider(props: AuthProviderProps) {
     if (Cookies.get('admin-template-lexpierini-auth')) {
       const cancel = firebase.auth().onIdTokenChanged(sectionSetup)
       return () => cancel()
+    } else {
+      setLoading(false)
     }
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, googleLogin, logout }}>
+    <AuthContext.Provider value={{ user, loading, googleLogin, logout }}>
       {props.children}
     </AuthContext.Provider>
   )
