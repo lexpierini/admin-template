@@ -4,23 +4,27 @@ import useAuth from '@/data/hook/useAuth'
 import { useState } from 'react'
 
 export default function authentication() {
-  const { user, googleLogin } = useAuth()
+  const { registerUser, login, googleLogin } = useAuth()
 
   const [mode, setMode] = useState<'login' | 'register'>('login')
   const [email, setEmail] = useState('')
   const [password, setPasword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const showError = (msg: string, time: number) => {
+  const showError = (msg: string, time: number = 5) => {
     setError(msg) // An error occurred!
     setTimeout(() => setError(null), time * 1000)
   }
 
-  const submit = () => {
-    if (mode === 'login') {
-      console.log('log in')
-    } else {
-      console.log('Sing up')
+  const submit = async () => {
+    try {
+      if (mode === 'login') {
+        await login(email, password)
+      } else {
+        await registerUser(email, password)
+      }
+    } catch (error) {
+      showError(error.message)
     }
   }
 
